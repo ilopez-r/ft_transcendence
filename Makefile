@@ -1,4 +1,4 @@
-.PHONY: all re fclean build up backend-dev stop clean
+.PHONY: all build up stop clean fclean re re-full help
 
 # Regla por defecto: construye y levanta los contenedores
 all: build up
@@ -19,41 +19,39 @@ up:
 	@echo "🔧 Backend: http://localhost:3000"
 	@echo "📊 Backend Health: http://localhost:3000/health"
 
-# Reconstruye completamente: detiene, limpia, construye y levanta
-re: fclean build up
-
-# ✅ NUEVO: Solo detener contenedores (mantiene datos)
+# Solo detener contenedores (mantiene database)
 stop:
 	@echo "⏹️ Stopping Docker containers..."
 	@docker-compose down > /dev/null 2>&1
 	@echo "✅ Docker containers stopped (data preserved)."
 
-# ✅ NUEVO: Limpiar sin eliminar volúmenes (mantiene datos)
+# Limpiar sin eliminar volúmenes (mantiene database)
 clean:
 	@echo "🧹 Cleaning Docker containers and images (preserving data)..."
 	@docker-compose down --rmi all > /dev/null 2>&1
 	@echo "✅ Docker cleanup completed (data preserved)."
 
-# ✅ MODIFICADO: Limpia completamente incluyendo datos
+# Limpia completamente (borra database)
 fclean:
 	@echo "🧹 Cleaning Docker containers, images, and volumes..."
 	@echo "⚠️  WARNING: This will delete all user data!"
 	@docker-compose down -v --rmi all > /dev/null 2>&1
 	@echo "✅ Docker cleanup completed (all data deleted)."
 
-# Desarrollo del backend (sin Docker)
-backend-dev:
-	@echo "🔧 Starting backend in development mode..."
-	@cd backend && npm install && npm run dev
+# Reconstruye (mantiene database)
+re: clean build up
 
-# ✅ NUEVA: Ayuda actualizada
+# Reconstruye completamente (borra database)
+re-full: fclean build up
+
+# Ayuda
 help:
 	@echo "Available commands:"
-	@echo "  make         - Build and start Docker containers"
-	@echo "  make build   - Only build Docker images"
-	@echo "  make up      - Only start Docker containers"
-	@echo "  make stop    - Stop containers (preserve data)"
-	@echo "  make clean   - Clean containers/images (preserve data)"
-	@echo "  make re      - Full rebuild: clean, build, and start"
-	@echo "  make fclean  - Full clean: ⚠️ DELETES ALL DATA ⚠️"
-	@echo "  make backend-dev - Start backend in development mode"
+	@echo "  make          - Build and start Docker containers"
+	@echo "  make build    - Only build Docker images"
+	@echo "  make up       - Only start Docker containers"
+	@echo "  make stop     - Stop containers (preserves database)"
+	@echo "  make clean    - Clean containers/images (preserves database)"
+	@echo "  make fclean   - Full clean (removes database)"
+	@echo "  make re       - Rebuild (preserves database)"
+	@echo "  make re-full  - Full rebuild (removes database)"
