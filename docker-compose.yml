@@ -1,0 +1,31 @@
+# docker-compose.yml - ACTUALIZADO con persistencia de datos
+services:
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8080:80"
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - backend
+
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: docker/Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - HOST=0.0.0.0
+    volumes:
+      # ✅ MONTAR el volumen persistente en /app/data
+      - backend_data:/app/data
+
+volumes:
+  # ✅ VOLUMEN PERSISTENTE para la base de datos
+  backend_data:
+    driver: local

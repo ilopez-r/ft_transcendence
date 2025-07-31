@@ -1,0 +1,10 @@
+- Creado Dockerfile para que corra todo dentro y llamarlo desde el docker-compose
+- Actualizados package.json y tsconfig.json
+- Carpetas config y docker
+- Añadidos console.log por todos lados para debugging 
+- En main.ts cambiado la url del frontend y añadido lo de health
+- En userController.ts cambiado el logout para las cookies y el login solo la parte de las cookies para que coincidan con las del logout
+- En database.ts cambiado el path de la db para que persista al cerrar la pagina
+- En init.ts cambio ruta para el archivo init.sql porque no lo encontraba correctamente
+
+SI EN EL BUSCADOR BUSCAS "CAMBIO" PUEDES VER DIRECTAMENTE QUÉ ES LO QUE HE CAMBIADO

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PONG</title>
+  <!-- Import all CSS files -->
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/home.css" />
+  <link rel="stylesheet" href="/styles/play.css" />
+  <link rel="stylesheet" href="/styles/profile.css" />
+  <link rel="stylesheet" href="/styles/tournament.css" />
+  <link rel="stylesheet" href="/styles/auth.css" />
+</head>
+<body>
+  <header class="game-header">
+    <nav class="game-nav">
+      <div class="nav-left">
+        <a href="/" data-link class="nav-btn">Home</a>
+      </div>
+      <div class="nav-center">
+        <div class="logo">PONG</div>
+      </div>
+      <div class="nav-right" id="nav-right">
+        <!-- Los botones se cargarán dinámicamente según el estado de autenticación -->
+      </div>
+    </nav>
+  </header>
+
+  <main class="game-main">
+    <!-- El contenido principal de la aplicación se cargará aquí. -->
+    <!-- En la página de inicio, el game-container y su contenido se inyectarán en este div. -->
+    <div id="app" class="page-content"></div>
+  </main>
+
+  <footer>
+    <p>© 2025 PONG</p>
+  </footer>
+
+  <!-- Ruta absoluta para main.js -->
+  <script type="module" src="/dist/main.js"></script>
+</body>
+</html>
