@@ -1,9 +1,0 @@
-services:
-  frontend:
-    build: 
-      context: ./frontend
-      dockerfile: docker/Dockerfile
-    ports:
-      - "8080:80"
-    environment:
-      - NODE_ENV=production
